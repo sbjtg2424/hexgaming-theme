@@ -1,0 +1,93 @@
+<script>
+  if(typeof(Spurit) === 'undefined'){
+    var Spurit = {};
+  }
+  if(!Spurit.sdc){
+    Spurit.sdc = {};
+  }
+  if(!Spurit.sdc.snippet){
+    Spurit.sdc.snippet = {};
+  }
+  if(!Spurit.sdc.snippet.excludedPrices){
+    Spurit.sdc.snippet.excludedPrices = {
+      selectors: ''
+    };
+  }
+  Spurit.sdc.snippet.shopHash = 'b5abb5449b49ecd3472a28f4c7ef0979';
+  Spurit.sdc.snippet.cacheTimestamp = 1680490309;
+
+  if (typeof(Spurit.globalSnippet) === 'undefined') {
+      Spurit.globalSnippet = {
+          shop_currency: '{{ shop.currency }}',
+          money_format: '{{ shop.money_format }}',
+          cart: {{ cart | json }},
+          customer_id: '{{ customer.id }}'
+      };
+  }
+</script>
+
+<script id="discount-widget-template" type="text/html">
+    <div class="sdc-widget">
+        <div class="sdc-widget__wrapper">
+            <input class="sdc-widget__input" id="sdc-discount"
+                   placeholder="{%- raw -%}{{label}}{%- endraw -%}"
+                   aria-label="{%- raw -%}{{label}}{%- endraw -%}"
+                   autocomplete="off" type="text" disabled data-code-input/>
+            <button type="button" class="sdc-widget__button sdc-widget__button_load" data-apply disabled>
+                {%- raw -%}{{btnApplyText}}{%- endraw -%}
+            </button>
+        </div>
+        <div class="sdc-widget__tags"></div>
+        <div class="sdc-widget__info"></div>
+    </div>
+</script>
+
+<script id="discount-tag-template" type="text/html">
+    <span class="sdc-tag {%- raw -%} {{class}}{%- endraw -%}">
+        <svg class="sdc-tag__icon-label" id="tags-filled">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+                <path
+                    fill-opacity=".55"
+                    d="M17.78 3.09C17.45 2.443 16.778 2 16 2h-5.165c-.535 0-1.046.214-1.422.593l-6.82 6.89c0 .002 0 .003-.002.003-.245.253-.413.554-.5.874L.738 8.055c-.56-.953-.24-2.178.712-2.737L9.823.425C10.284.155 10.834.08 11.35.22l4.99 1.337c.755.203 1.293.814 1.44 1.533z">
+                </path>
+                <path
+                    d="M10.835 2H16c1.105 0 2 .895 2 2v5.172c0 .53-.21 1.04-.586 1.414l-6.818 6.818c-.777.778-2.036.782-2.82.01l-5.166-5.1c-.786-.775-.794-2.04-.02-2.828.002 0 .003 0 .003-.002l6.82-6.89C9.79 2.214 10.3 2 10.835 2zM13.5 8c.828 0 1.5-.672 1.5-1.5S14.328 5 13.5 5 12 5.672 12 6.5 12.672 8 13.5 8z">
+                </path>
+            </svg>
+        </svg>
+        {%- raw -%}{{code}}{%- endraw -%}
+        {%- raw -%}{{#cancelBtn}}{%- endraw -%}
+        <button type="button" class="sdc-tag__button" data-cancel
+                aria-label="remove discount code {%- raw -%}{{code}}{%- endraw -%}">
+            <svg class="sdc-tag__icon-cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path
+                    d="M11.414 10l4.293-4.293c.391-.391.391-1.023 0-1.414s-1.023-.391-1.414 0l-4.293 4.293-4.293-4.293c-.391-.391-1.023-.391-1.414 0s-.391 1.023 0 1.414l4.293 4.293-4.293 4.293c-.391.391-.391 1.023 0 1.414.195.195.451.293.707.293.256 0 .512-.098.707-.293l4.293-4.293 4.293 4.293c.195.195.451.293.707.293.256 0 .512-.098.707-.293.391-.391.391-1.023 0-1.414l-4.293-4.293z">
+                </path>
+            </svg>
+        </button>
+        {%- raw -%}{{/cancelBtn}}{%- endraw -%}
+    </span>
+</script>
+
+<script id="discount-bar-template" type="text/html">
+    <div class="sdc-bar">
+        <div class="sdc-bar__data">
+            {%- raw -%}{{{discountTag}}}{%- endraw -%}
+            <span class="sdc-bar__text">
+              {%- raw -%}{{text}}{%- endraw -%}
+            </span>
+        </div>
+        <button type="button" class="sdc-bar__close" data-close>
+            <svg class="sdc-bar__close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path
+                    d="M11.414 10l4.293-4.293c.391-.391.391-1.023 0-1.414s-1.023-.391-1.414 0l-4.293 4.293-4.293-4.293c-.391-.391-1.023-.391-1.414 0s-.391 1.023 0 1.414l4.293 4.293-4.293 4.293c-.391.391-.391 1.023 0 1.414.195.195.451.293.707.293.256 0 .512-.098.707-.293l4.293-4.293 4.293 4.293c.195.195.451.293.707.293.256 0 .512-.098.707-.293.391-.391.391-1.023 0-1.414l-4.293-4.293z">
+                </path>
+            </svg>
+        </button>
+    </div>
+</script>
+
+<div id="discount-bar"></div>
+
+    <script src="https://cdn-spurit.com/shopify-apps/share-discounts/common.js"></script>
+    <link href="https://cdn-spurit.com/shopify-apps/share-discounts/common.css" rel="stylesheet" type="text/css" media="all">

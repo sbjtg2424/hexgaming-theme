@@ -1,0 +1,13 @@
+<script type='text/javascript'>let shop ='hexgaming-com.myshopify.com'; let code = '142ed413126d04585ae10fe3aa45738d18540efd';</script>﻿<!-- Start : BrokenLink Redirect -->
+<script type="text/javascript">
+window.fetch("https://api-brokenlinkmanager.giraffly.com/api/v1/receive_url?shop="+shop+"&code="+code+"&url="+window.location.pathname+window.location.search.replace('&',"-@-"))
+.then(response => response.json())
+.then(data => {
+    if(data.code == 200){
+        window.location.href = data.data
+    }
+}).catch(errot={
+
+})
+</script>
+<!-- END : BrokenLink Redirect -->

@@ -1,0 +1,30 @@
+
+<div class="page-width">
+  <div>
+    <div>
+      <div class="section-header text-center">
+        <h1>{{ page.title }}</h1>
+      </div>
+
+      <div class="rte1">
+        {{ page.content }}
+      </div>
+    </div>
+  </div>
+</div>
+  <script>
+    window.performance.mark('debut:theme_stylesheet_loaded.start');
+
+    function onLoadStylesheet() {
+      performance.mark('debut:theme_stylesheet_loaded.end');
+      performance.measure('debut:theme_stylesheet_loaded', 'debut:theme_stylesheet_loaded.start', 'debut:theme_stylesheet_loaded.end');
+
+      var url = "{{ 'sponsorship.css' | asset_url }}";
+      var link = document.querySelector('link[href="' + url + '"]');
+      link.loaded = true;
+      link.dispatchEvent(new Event('load'));
+    }
+  </script>
+
+  <link rel="stylesheet" href="{{ 'sponsorship.css' | asset_url }}" type="text/css" media="print" onload="this.media='all';onLoadStylesheet()">
+
